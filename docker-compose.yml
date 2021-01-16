@@ -12,11 +12,11 @@ services:
       - POSTGRES_DB=postgres
   
   odoo:
-    image: odoo:13.0
+    image: odoo:14.0
     depends_on:
       - "postgres"
     ports:
-      - "13069:8069"
+      - "14069:8069"
     tty: true
     command: -- --dev=reload
     environment:
