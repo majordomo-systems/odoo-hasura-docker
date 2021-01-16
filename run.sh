@@ -1,7 +1,7 @@
 #!/bin/bash
 DESTINATION=$1
 # clone Odoo directory
-git clone --depth=1 https://github.com/majordomo-systems/odoo-hasura-docker.git $DESTINATION
+git clone -b 14.0 https://github.com/majordomo-systems/odoo-hasura-docker.git $DESTINATION
 rm -rf $DESTINATION/.git
 sudo chmod -R 777 $DESTINATION
 # run Odoo
