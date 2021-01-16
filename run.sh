@@ -23,9 +23,6 @@ docker exec --user root odoo-hasura-docker_odoo_1 chmod -R 777 /mnt/extra-addons
 # docker-compose up -d
 
 ARRAY=$(hostname -I)
-echo ${ARRAY[*]}
-grep -o '^\S*' $ARRAY
-echo test
 IP=$(sed 's/\s.*$//' <<<"$ARRAY")
 echo $IP
 
