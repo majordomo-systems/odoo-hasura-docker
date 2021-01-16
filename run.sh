@@ -1,7 +1,7 @@
 #!/bin/bash
 DESTINATION=$1
 # clone Odoo directory
-git clone -b 14.0 https://github.com/majordomo-systems/odoo-hasura-docker.git $DESTINATION
+git clone -b 13.0 https://github.com/majordomo-systems/odoo-hasura-docker.git $DESTINATION
 rm -rf $DESTINATION/.git
 sudo chmod -R 777 $DESTINATION
 # run Odoo
@@ -17,5 +17,5 @@ docker exec --user root odoo-hasura-docker_odoo_1 chmod -R 777 /mnt/extra-addons
 # docker stop $(docker ps -aq)
 # docker-compose up -d
 
-echo "Odoo @ http://localhost:8069"
+echo "Odoo @ http://localhost:13069"
 echo "GraphQL Console @ http://localhost:80"
