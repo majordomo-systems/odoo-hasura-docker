@@ -3,7 +3,7 @@
 Install [docker](https://docs.docker.com/get-docker/) and [docker-compose](https://docs.docker.com/compose/install/) yourself, then run:
 
 ``` bash
-curl -s hhttps://raw.githubusercontent.com/majordomo-systems/odoo-hasura-docker/13.0/run.sh | sudo bash -s odoo-hasura-docker
+curl -s https://raw.githubusercontent.com/majordomo-systems/odoo-hasura-docker/13.0/run.sh | sudo bash -s odoo-hasura-docker
 ```
 
 Start container:
