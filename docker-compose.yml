@@ -1,0 +1,63 @@
+version: '3.6'
+services:
+  
+  postgres:
+    image: postgres:12
+    restart: always
+    volumes:
+    - db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - POSTGRES_DB=postgres
+  
+  odoo:
+    image: odoo:13.0
+    depends_on:
+      - "postgres"
+    ports:
+      - "8069:8069"
+    tty: true
+    command: -- --dev=reload
+    environment:
+      - HOST=postgres
+      - USER=odoo
+      - PASSWORD=odoo
+    volumes:
+      - ./addons:/mnt/extra-addons
+      - ./etc:/etc/odoo
+    restart: always
+
+  graphql-engine:
+    image: hasura/graphql-engine:v1.3.3
+    depends_on:
+    - "postgres"
+    restart: always
+    environment:
+      # database url to connect
+      HASURA_GRAPHQL_DATABASE_URL: postgres://odoo:odoo@postgres:5432/odoo
+      ## enable the console served by server
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set "false" to disable console
+      ## enable debugging mode. It is recommended to disable this in production
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      ## uncomment next line to set an admin secret
+      # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+    command:
+    - graphql-engine
+    - serve
+  
+  caddy:
+    image: caddy/caddy
+    depends_on:
+    - "graphql-engine"
+    restart: always
+    ports:
+    - "80:80"
+    - "443:443"
+    volumes:
+    - ./Caddyfile:/etc/caddy/Caddyfile
+    - caddy_certs:/root/.caddy
+
+volumes:
+  db_data:
+  caddy_certs:
