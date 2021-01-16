@@ -24,7 +24,6 @@ docker exec --user root odoo-hasura-docker_odoo_1 chmod -R 777 /mnt/extra-addons
 
 ARRAY=$(hostname -I)
 IP=$(sed 's/\s.*$//' <<<"$ARRAY")
-echo $IP
 
 echo "Odoo @ http://localhost:14069 or http://$IP:14069"
 echo "GraphQL Console @ http://localhost:80 or http://$IP:80"
